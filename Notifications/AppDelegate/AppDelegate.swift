@@ -23,6 +23,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Clear App badge number
         UIApplication.shared.applicationIconBadgeNumber = 0
     }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let tokenParts = deviceToken.map { (data) -> String in
+            return String(format: "%02.2hhx", data)
+        }
+        
+        let token = tokenParts.joined()
+        print(token)
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Register Failed")
+    }
 }
 
 // MARK: UISceneSession Lifecycle
